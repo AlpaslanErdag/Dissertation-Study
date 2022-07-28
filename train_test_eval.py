@@ -97,16 +97,7 @@ def evaluate(params):
                                 f.write("\n\nPredicted Abstract:\n")
                                 f.write(trial.abstract)
                         pbar.update(1)
-                #BLeU Scores
-                b_scores_1 = []
-                b_scores_2 = []
-                b_scores_3 = []
-                b_scores_4 = []
-                for i in range(0, len(reals)):
-                    b_scores_1.append(sentence_bleu([word_tokenize(reals[i])], word_tokenize(preds[i]), weights=(1, 0, 0, 0)))
-                    b_scores_2.append(sentence_bleu([word_tokenize(reals[i])], word_tokenize(preds[i]), weights=(1./2, 1./2, 0, 0)))
-                    b_scores_3.append(sentence_bleu([word_tokenize(reals[i])], word_tokenize(preds[i]), weights=(1./3, 1./3, 1./3, 0)))
-                    b_scores_4.append(sentence_bleu([word_tokenize(reals[i])], word_tokenize(preds[i]), weights=(1./4, 1./4, 1./4, 1./4)))
+               
                 #METEOR Scores
                 m_scores = []
                 for i in range(0, len(reals)):
@@ -118,8 +109,4 @@ def evaluate(params):
                 print("ROGUE-1:", r_scores["rouge-1"]["f"])
                 print("ROGUE-2:", r_scores["rouge-2"]["f"])
                 print("ROGUE-l:", r_scores["rouge-l"]["f"])
-                print("BLeU-1:", np.mean(b_scores_1))
-                print("BLeU-2:", np.mean(b_scores_2))
-                print("BLeU-3:", np.mean(b_scores_3))
-                print("BLeU-4:", np.mean(b_scores_4))
                 print("METEOR:", np.mean(m_scores))
