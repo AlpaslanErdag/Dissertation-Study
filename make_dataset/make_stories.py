@@ -9,16 +9,16 @@ def xlsx2stories(xlsx_path, train_dir, val_dir):
     :param train_dir, val_dir: path of output dir
     """
 
-    # 파일을 읽고 줄로 분리
+
     file = pd.read_excel(xlsx_path)
-    pairs = [[file['train_x'][i], file['train_y'][i]] for i in range(len(file))]
+    pairs = [[file['article'][i], file['summary'][i]] for i in range(len(file))]
     pairs_len = len(pairs) # 페어 개수
 
     train_num = (pairs_len // 10) * 8 # train 페어 개수
     pairs_train = pairs[:train_num]
     pairs_val = pairs[train_num:]
 
-    # story 파일로 변환
+    # story 
     for idx, pair in enumerate(pairs_train):
         with open(os.path.join(train_dir, 'train%d.story'%idx), 'w') as fout:
             print(pair[0], file = fout)
